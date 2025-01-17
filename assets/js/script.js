@@ -1,4 +1,4 @@
-const splitText = new SplitType('[data-target="SplitText"]', {
+new SplitType('[data-target="SplitText"]', {
     tagName: "span",
     types: "line, words",
 });
