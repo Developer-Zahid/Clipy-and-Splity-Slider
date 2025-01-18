@@ -128,11 +128,12 @@ svg
     }
 
     .tf-card_text {
-        font-size: 3rem;
+        font-size: clamp(2rem, 6vw, 3rem);
         font-weight: 500;
         margin-block-start: 1rem;
         margin-block-end: 2rem;
         text-transform: uppercase;
+        
         @media screen and (min-width: 992px) {
             max-width: 22ch;
         }
