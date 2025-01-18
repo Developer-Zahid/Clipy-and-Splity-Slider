@@ -4,7 +4,6 @@
     --color-text: #ffffff;
     --color-bg: #000000;
     --color-cover: #222;
-    --animation-duration: 1s;
 }
 
 * {
@@ -92,6 +91,7 @@ svg
 
     .tf-card_content {
         padding-bottom: calc(var(--_slider-nav-height) + var(--_grid-gap));
+        transition: opacity ease calc(var(--_animation-duration) / 2); 
     }
 
     .tf-card_icon {
@@ -130,7 +130,7 @@ svg
             background-color: inherit;
             transform: scaleX(1);
             transform-origin: left center;
-            transition: transform var(--animation-duration) cubic-bezier(0.76, 0.09, 0.215, 1);
+            transition: transform var(--_animation-duration) cubic-bezier(0.76, 0.09, 0.215, 1);
             pointer-events: none;
         }
     }
@@ -144,7 +144,7 @@ svg
 
 .swiper-slide {
     position: relative;
-    transition: 0s var(--animation-duration) ease;
+    transition: 0s var(--_animation-duration) ease;
     transition-property: opacity, visibility;
     
     &:not(.swiper-slide-active) {
@@ -153,7 +153,6 @@ svg
 
         .tf-card_content {
             opacity: 0;
-            transition: opacity ease .6s;
         }
     }
 
@@ -161,11 +160,12 @@ svg
         z-index: 1;
 
         .tf-card_content {
-            transition: opacity ease 1.2s .8s;
+            transition-duration: var(--_animation-duration);
+            transition-delay: var(--_animation-duration);
         }
 
         .tf-card_media::after {
-            transition-delay: var(--animation-duration);
+            transition-delay: var(--_animation-duration);
             transform: scaleX(0);
             transform-origin: right center;
         }
