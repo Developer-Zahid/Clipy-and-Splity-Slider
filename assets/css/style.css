@@ -31,14 +31,19 @@ svg
 }
 
 .tf-slider {
+    --_media-ratio: 120%;
     --_media-size: clamp(400px, 40vw, 580px);
     --_grid-gap: 20px;
     --_slider-nav-height: 50px;
     --swiper-theme-color: var(--color-primary);
     --swiper-pagination-progressbar-bg-color: var(--color-cover);
-    max-width: 1170px;
     margin-inline: auto;
     display: grid;
+    max-width: 450px;
+    
+    @media screen and (min-width: 992px) {
+        max-width: 1170px;
+    }
 
     .tf-slider_wrapper {
         display: grid;
@@ -50,26 +55,39 @@ svg
     }
 
     .tf-slider_nav {
-        z-index: 1;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 16px;
-        margin-top: calc(var(--_slider-nav-height) * -1);
 
-        width: calc(100% - var(--_media-size) - var(--_grid-gap));
+        @media screen and (max-width: 991px) {
+            padding-top: calc(var(--_media-ratio) + var(--_grid-gap));
+            width: 100%;
+            position: absolute;
+            order: -1;
+        }
+
+        @media screen and (min-width: 992px) {
+            margin-top: calc(var(--_slider-nav-height) * -1);
+            width: calc(100% - var(--_media-size) - var(--_grid-gap));
+        }
 
         .tf-slider_btn{
             font-size: 1rem;
             font-family: var(--font-primary);
             font-weight: 600;
-
             width: 4rem;
             aspect-ratio: 1/1;
             border-radius: 50%;
             background-color: #ffffff;
             border: 0;
             cursor: pointer;
+            transition: background-color 0.2s ease;
+            z-index: 1;
+
+            &:is(:active, :focus-visible) {
+                background-color: var(--color-primary);
+            }
 
             &:last-of-type {
                 order: 1;
@@ -85,13 +103,24 @@ svg
 .tf-card {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr var(--_media-size);
-    align-items: center;
     gap: var(--_grid-gap);
-
+    
+    @media screen and (min-width: 992px) {
+        height: 100%;
+        grid-template-columns: 1fr var(--_media-size);
+    }
+    
     .tf-card_content {
-        padding-bottom: calc(var(--_slider-nav-height) + var(--_grid-gap));
-        transition: opacity ease calc(var(--_animation-duration) / 2); 
+        transition: opacity ease calc(var(--_animation-duration) / 2);
+        
+        @media screen and (max-width: 991px) {
+            padding-top: calc(var(--_slider-nav-height) + var(--_grid-gap));
+        }
+
+        @media screen and (min-width: 992px) {
+            padding-bottom: calc(var(--_slider-nav-height) + var(--_grid-gap));
+            align-self: center;
+        }
     }
 
     .tf-card_icon {
@@ -104,7 +133,9 @@ svg
         margin-block-start: 1rem;
         margin-block-end: 2rem;
         text-transform: uppercase;
-        max-width: 22ch;
+        @media screen and (min-width: 992px) {
+            max-width: 22ch;
+        }
 
         .line {
             overflow: hidden;
@@ -120,13 +151,17 @@ svg
         pointer-events: none;
         position: relative;
         overflow: hidden;
-        padding-top: 120%;
+        padding-top: var(--_media-ratio);
         background-color: var(--color-cover);
+
+        @media screen and (min-width: 992px) {
+            order: 1;
+        }
 
         &::after {
             content: '';
             position: absolute;
-            inset: 0;
+            inset: -1px 0;
             background-color: inherit;
             transform: scaleX(1);
             transform-origin: left center;
@@ -138,6 +173,8 @@ svg
     .tf-card_image {
         position: absolute;
         inset: 0;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 }

@@ -39,7 +39,7 @@ new Swiper('[data-swiper="Clipy-Splity"]', {
         onlyInViewport: true,
     },
     autoplay: {
-        delay: 8000,
+        delay: 5000,
         disableOnInteraction: false,
     },
     pagination: {
